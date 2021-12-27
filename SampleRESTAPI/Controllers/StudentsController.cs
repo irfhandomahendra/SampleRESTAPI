@@ -26,7 +26,7 @@ namespace SampleRESTAPI.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles ="student")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentDto>>> Get()
         {
@@ -56,6 +56,7 @@ namespace SampleRESTAPI.Controllers
             return Ok(_mapper.Map<StudentDto>(result));
         }
 
+        [Authorize("admin")]
         [HttpPost]
         public async Task<ActionResult<StudentDto>> Post([FromBody] StudentForCreateDto studentforCreateDto)
         {
