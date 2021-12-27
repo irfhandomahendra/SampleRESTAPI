@@ -7,6 +7,6 @@ namespace SampleRESTAPI.Data
     public interface ICourse : ICrud<Course>
     {
         Task<IEnumerable<Course>> GetByTitle(string title);
-        //Task<IEnumerable<Enrollment>> GetStudents(string id);
+        Task<IEnumerable<Course>> GetStudents(string id);
     }
 }

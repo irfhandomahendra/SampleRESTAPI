@@ -36,7 +36,7 @@ namespace SampleRESTAPI.Controllers
 
         // GET api/<CoursesController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Course>> Get(int id)
+        public async Task<ActionResult<CourseDto>> Get(int id)
         {
             var result = await _course.GetById(id.ToString());
             if (result == null)
@@ -101,11 +101,11 @@ namespace SampleRESTAPI.Controllers
             return results;
         }
 
-        //[HttpGet("getstudent")]
-        //public async Task<IEnumerable<Enrollment>> GetStudents(string id)
-        //{
-        //    var results = await _course.GetStudents(id);
-        //    return results;
-        //}
+        [HttpGet("getstudent")]
+        public async Task<IEnumerable<Course>> GetStudents(string id)
+        {
+            var results = await _course.GetStudents(id);
+            return results;
+        }
     }
 }

@@ -59,14 +59,13 @@ namespace SampleRESTAPI.Data
             return results;
         }
 
-        //public async Task<IEnumerable<Enrollment>> GetStudents(string id)
-        //{
-        //    await GetById(id);
-        //    var results = await _db.Enrollments.Where(s =>
-        //        s.CourseID == Convert.ToInt32(id)).Include(s=>s.Student).
-        //        AsNoTracking().ToListAsync();
-        //    return results;
-        //}
+        public async Task<IEnumerable<Course>> GetStudents(string id)
+        {
+            var results = await _db.Courses.Include(e => e.Enrollments).
+                ThenInclude(s => s.Student).Where(c => c.Title.ToLower().Contains(id.ToLower()))
+                .AsNoTracking().ToListAsync();
+            return results;
+        }
 
         public async Task<Course> Insert(Course obj)
         {
